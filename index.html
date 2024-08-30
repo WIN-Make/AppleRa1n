@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Jailbreak Terminal</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #00FF00;
+            font-family: "Courier New", Courier, monospace;
+            padding: 20px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .terminal {
+            border: 2px solid #00FF00;
+            padding: 15px;
+            width: 95%;
+            height: 80vh;
+            margin: 20px auto;
+            background-color: #000;
+            box-shadow: 0 0 10px #00FF00;
+            text-align: left;
+            overflow-y: auto;
+        }
+        .command {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .blinking-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: #00FF00;
+            animation: blink 1s step-end infinite;
+            vertical-align: bottom;
+        }
+        #startButton, #connectButton {
+            background-color: #00FF00;
+            color: #000;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #startButton {
+            display: none; /* Initially hidden */
+        }
+        @keyframes blink {
+            0%, 50% { background-color: #00FF00; }
+            50%, 100% { background-color: transparent; }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal" id="terminal">
+        <div class="blinking-cursor" id="cursor"></div>
+    </div>
+    <button id="connectButton" onclick="connectDevice()">Connect Device</button>
+    <button id="startButton" onclick="confirmJailbreak()">Start Jailbreak</button>
+
+    <script>
+        function connectDevice() {
+            const connectButton = document.getElementById("connectButton");
+            const startButton = document.getElementById("startButton");
+            const terminal = document.getElementById("terminal");
+            const cursor = document.getElementById("cursor");
+
+            // Simulate device detection
+            const steps = [
+                "Detecting connected device...",
+                "Device detected: Generic Mobile Device",
+                "Preparing environment for jailbreak..."
+            ];
+
+            let stepIndex = 0;
+            function displayNextStep() {
+                if (stepIndex < steps.length) {
+                    const step = steps[stepIndex];
+                    const commandElement = document.createElement("div");
+                    commandElement.className = "command";
+                    commandElement.textContent = step;
+                    terminal.insertBefore(commandElement, cursor);
+
+                    stepIndex++;
+                    setTimeout(displayNextStep, 1000); // Simulate delay between detection steps
+                } else {
+                    connectButton.style.display = 'none'; // Hide the connect button
+                    startButton.style.display = 'block'; // Show the start button
+                }
+            }
+
+            displayNextStep();
+        }
+
+        function confirmJailbreak() {
+            const userConfirmed = confirm("Are you sure you want to start the jailbreak process?");
+            if (userConfirmed) {
+                startJailbreak();
+            }
+        }
+
+        function startJailbreak() {
+            const terminal = document.getElementById("terminal");
+            const cursor = document.getElementById("cursor");
+            const startButton = document.getElementById("startButton");
+
+            // Disable the button after starting
+            startButton.disabled = true;
+            startButton.style.display = 'none';
+
+            // Extended fake jailbreak steps with more details
+            const steps = [
+                "Establishing secure connection to device...",
+                "SSH connection established (IP: 192.168.1.15, Port: 22)...",
+                "Checking device compatibility...",
+                "Fetching device serial number and unique identifiers...",
+                "Verifying cryptographic signatures...",
+                "Decrypting firmware components...",
+                "Loading kernel modules...",
+                "Kernel module: 'exploit_0day.kext' loaded successfully.",
+                "Downloading necessary exploits...",
+                "Exploit downloaded: checkm8 (4.2MB)",
+                "Preparing exploit environment...",
+                "Disabling secure boot and integrity checks...",
+                "Sending payload to device...",
+                "Payload sent successfully.",
+                "Injecting low-level hooks into system libraries...",
+                "Low-level hooks injected.",
+                "Patching bootloader code...",
+                "Bootloader patch successful.",
+                "Initiating kernel exploit...",
+                "Bypassing ASLR and DEP protections...",
+                "Gaining root privileges...",
+                "Root privileges acquired.",
+                "Mounting filesystem with read/write access...",
+                "Filesystem mounted.",
+                "Injecting custom shell into /bin/bash...",
+                "Custom shell injection successful.",
+                "Running privilege escalation script...",
+                "[*] Exploiting CVE-2021-1234...",
+                "[*] Exploitation successful. Gained full root access.",
+                "Downloading additional jailbreak scripts...",
+                "Script 1/5: 'overload_kernel.sh' downloaded.",
+                "Script 2/5: 'bypass_rootguard.sh' downloaded.",
+                "Script 3/5: 'unlock_privileges.sh' downloaded.",
+                "Script 4/5: 'persist_root.sh' downloaded.",
+                "Script 5/5: 'disable_watchdog.sh' downloaded.",
+                "Executing 'overload_kernel.sh'...",
+                "[+] Injecting malicious code into kernel memory space...",
+                "[+] Manipulating syscall table to disable system watchdog...",
+                "[+] Redirecting I/O streams to hide activity logs...",
+                "[+] Scrambling device unique ID (UDID)...",
+                "Executing 'bypass_rootguard.sh'...",
+                "[+] Deactivating rootguard protections...",
+                "[+] Patching system binaries to allow root access...",
+                "[+] Writing custom init.d scripts for persistent control...",
+                "[+] Hijacking security tokens for elevated permissions...",
+                "Executing 'unlock_privileges.sh'...",
+                "[+] Enumerating and killing security daemons...",
+                "[+] Installing modified su binary with elevated privileges...",
+                "[+] Disabling firmware updates and OTA checks...",
+                "[+] Remounting system partitions...",
+                "[+] Injecting backdoor listeners...",
+                "Executing 'persist_root.sh'...",
+                "[+] Writing persistence hooks...",
+                "[+] Creating root shell backdoor...",
+                "[+] Modifying boot sequence to maintain root access...",
+                "Executing 'disable_watchdog.sh'...",
+                "[+] Disabling all watchdog timers...",
+                "[+] Ensuring no reboot occurs during jailbreak...",
+                "[+] Finalizing jailbreak environment...",
+                "[+] Cleaning up and removing temporary files...",
+                "[+] Temporary files deleted.",
+                "Initiating advanced exploit chain...",
+                "Exploiting kernel vulnerability...",
+                "Kernel vulnerability exploited successfully.",
+                "Injecting additional kernel patches...",
+                "Kernel patches applied.",
+                "Gaining access to secure enclave...",
+                "Secure enclave compromised.",
+                "Decrypting user data partition...",
+                "User data partition decrypted.",
+                "Modifying system call table...",
+                "System call table modified.",
+                "Gaining access to baseband processor...",
+                "Baseband processor accessed.",
+                "Installing custom bootloader...",
+                "Custom bootloader installed.",
+                "Modifying device firmware...",
+                "Device firmware modified.",
+                "Overwriting system files...",
+                "System files overwritten.",
+                "Modifying device power management unit...",
+                "Power management unit modified.",
+                "Hijacking interrupt controller...",
+                "Interrupt controller hijacked.",
+                "Disabling hardware watchdog...",
+                "Hardware watchdog disabled.",
+                "Patching device secure boot chain...",
+                "Secure boot chain patched.",
+                "Altering device power-on self-test...",
+                "Power-on self-test altered.",
+                "Manipulating device thermal management...",
+                "Thermal management manipulated.",
+                "Bypassing device hardware checks...",
+                "Hardware checks bypassed.",
+                "Modifying kernel mode drivers...",
+                "Kernel mode drivers modified.",
+                "Overwriting device EEPROM...",
+                "EEPROM overwritten.",
+                "Gaining access to hardware debug interface...",
+                "Hardware debug interface accessed.",
+                "Disabling hardware encryption...",
+                "Hardware encryption disabled.",
+                "Compromising device trust zone...",
+                "Trust zone compromised.",
+                "Overwriting device boot ROM...",
+                "Boot ROM overwritten.",
+                "Patching device firmware update process...",
+                "Firmware update process patched.",
+                "Hijacking device DMA controller...",
+                "DMA controller hijacked.",
+                "Bypassing device memory protection unit...",
+                "Memory protection unit bypassed.",
+                "Modifying device bus interface...",
+                "Bus interface modified.",
+                "Hijacking device audio subsystem...",
+                "Audio subsystem hijacked.",
+                "Compromising device NFC controller...",
+                "NFC controller compromised.",
+                "Bypassing device camera subsystem...",
+                "Camera subsystem bypassed.",
+                "Overwriting device wireless firmware...",
+                "Wireless firmware overwritten.",
+                "Modifying device USB controller...",
+                "USB controller modified.",
+                "Hijacking device storage controller...",
+                "Storage controller hijacked.",
+                "Gaining access to device secure storage...",
+                "Secure storage accessed.",
+                "Bypassing device battery management...",
+                "Battery management bypassed.",
+                "Modifying device power supply unit...",
+                "Power supply unit modified.",
+                "Overwriting device serial number...",
+                "Serial number overwritten.",
+                "Hijacking device encryption keys...",
+                "Encryption keys hijacked.",
+                "Compromising device secure bootloader...",
+                "Secure bootloader compromised.",
+                "Bypassing device access control...",
+                "Access control bypassed.",
+                "Patching device memory management unit...",
+                "Memory management unit patched.",
+                "Hijacking device clock management...",
+                "Clock management hijacked.",
+                "Compromising device sensor subsystem...",
+                "Sensor subsystem compromised.",
+                "Overwriting device touch controller firmware...",
+                "Touch controller firmware overwritten.",
+                "Modifying device GPU firmware...",
+                "GPU firmware modified.",
+                "Hijacking device display controller...",
+                "Display controller hijacked.",
+                "Gaining access to device secure firmware...",
+                "Secure firmware accessed.",
+                "Bypassing device power sequencing...",
+                "Power sequencing bypassed.",
+                "Modifying device bootloader settings...",
+                "Bootloader settings modified.",
+                "Overwriting device environmental sensors...",
+                "Environmental sensors overwritten.",
+                "Compromising device biometric subsystem...",
+                "Biometric subsystem compromised.",
+                "Hijacking device identity management...",
+                "Identity management hijacked.",
+                "Patching device code signing process...",
+                "Code signing process patched.",
+                "Bypassing device firmware protection...",
+                "Firmware protection bypassed.",
+                "Modifying device secure update process...",
+                "Secure update process modified.",
+                "Overwriting device trust anchor...",
+                "Trust anchor overwritten.",
+                "Compromising device root of trust...",
+                "Root of trust compromised.",
+                "Hijacking device key management...",
+                "Key management hijacked.",
+                "Bypassing device secure boot key...",
+                "Secure boot key bypassed.",
+                "Modifying device secure processing unit...",
+                "Secure processing unit modified.",
+                "Overwriting device cryptographic engine...",
+                "Cryptographic engine overwritten.",
+                "Compromising device hardware root key...",
+                "Hardware root key compromised.",
+                "Hijacking device secure firmware loader...",
+                "Secure firmware loader hijacked.",
+                "Patching device secure boot process...",
+                "Secure boot process patched.",
+                "Bypassing device firmware verification...",
+                "Firmware verification bypassed.",
+                "Modifying device security enclave...",
+                "Security enclave modified.",
+                "Overwriting device secure OS...",
+                "Secure OS overwritten.",
+                "Compromising device tamper detection...",
+                "Tamper detection compromised.",
+                "Hijacking device integrity checker...",
+                "Integrity checker hijacked.",
+                "Patching device cryptographic functions...",
+                "Cryptographic functions patched.",
+                "Bypassing device secure kernel...",
+                "Secure kernel bypassed.",
+                "Modifying device system calls...",
+                "System calls modified.",
+                "Overwriting device memory encryption...",
+                "Memory encryption overwritten.",
+                "Compromising device boot integrity...",
+                "Boot integrity compromised.",
+                "Finalizing device jailbreak...",
+                "[*] Jailbreak complete! All system restrictions removed.",
+                "[*] Process complete. Exiting..."
+            ];
+
+            // Display steps one by one with a shorter delay for faster display
+            let stepIndex = 0;
+            function displayNextStep() {
+                if (stepIndex < steps.length) {
+                    const step = steps[stepIndex];
+                    const commandElement = document.createElement("div");
+                    commandElement.className = "command";
+                    commandElement.textContent = step;
+                    terminal.insertBefore(commandElement, cursor);
+
+                    stepIndex++;
+                    setTimeout(displayNextStep, 300); // Faster delay time for quicker steps
+                } else {
+                    cursor.style.display = 'none'; // Hide cursor after completing steps
+                }
+            }
+
+            displayNextStep();
+        }
+    </script>
+</body>
+</html>
